@@ -169,7 +169,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">923字</span>
+        <span class="post-count">1k字</span>
       </span>
     </span>
 
@@ -178,7 +178,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">4分</span>
+        <span class="post-count">5分</span>
       </span>
     </span>
 </div>
@@ -201,11 +201,62 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 5</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> boolean;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Max</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a &gt;= b)</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> b;</span><br><span class="line">&#125;   <span class="comment">// 比较大小的函数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSum</span><span class="params">(<span class="keyword">int</span> *a)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> MaxSum = <span class="number">0</span>,Sum = <span class="number">0</span>;</span><br><span class="line">    boolean Positive = <span class="number">0</span>;  <span class="comment">//判断增加过程中是否含有正值</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)&#123;</span><br><span class="line">        Sum += a[i];</span><br><span class="line">        <span class="keyword">if</span>(Sum &gt; <span class="number">0</span>)</span><br><span class="line">            Positive = <span class="number">1</span>;</span><br><span class="line">        Sum = Max(Sum, <span class="number">0</span>);</span><br><span class="line">        MaxSum = Max(Sum, MaxSum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(Positive == <span class="number">1</span>) <span class="keyword">return</span> MaxSum;</span><br><span class="line">    <span class="keyword">else</span>&#123;   <span class="comment">//全为负值的情况</span></span><br><span class="line">        MaxSum = a[<span class="number">0</span>];  <span class="comment">// 二次初始化MaxSum的值使其小于0</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; N; i++)&#123;</span><br><span class="line">            MaxSum = Max(MaxSum, a[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> MaxSum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[N];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, MaxSum(a));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>其时间复杂度为O(n)。</p>
 <h3 id="流程图："><a href="#流程图：" class="headerlink" title="流程图："></a>流程图：</h3><p>​    查找给定元素：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">input1=&gt;inputoutput: LinkList p, ElemType e</span><br><span class="line">condition1=&gt;condition: p-&gt;next == NULL</span><br><span class="line">condition2=&gt;condition: p-&gt;data == e</span><br><span class="line">operation1=&gt;operation: return p</span><br><span class="line">operation2=&gt;operation: return NULL</span><br><span class="line">operation3=&gt;operation: p=p-&gt;next</span><br><span class="line">operation4=&gt;operation: ..</span><br><span class="line"></span><br><span class="line">input1-&gt;operation4-&gt;condition1</span><br><span class="line">condition1(no,right)-&gt;operation3-&gt;condition2</span><br><span class="line">condition1(yes)-&gt;operation2(bottom)</span><br><span class="line">condition2(yes,bottom)-&gt;operation1(left)</span><br><span class="line">condition2(no)-&gt;operation4</span><br></pre></td></tr></table></figure>
+<div id="flowchart-0" class="flow-chart"></div>
+
 <p>​    链表中插入一个节点：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">i1=&gt;inputoutput: LinkList p, int i, ElemType e</span><br><span class="line">o1=&gt;operation: ..</span><br><span class="line">c1=&gt;condition: p!=NULL</span><br><span class="line">o2=&gt;operation: --i</span><br><span class="line">c2=&gt;condition: i &lt; 1</span><br><span class="line">o3=&gt;operation: LinkNode *q =(LinkNode *)malloc(sizeof(LinkNode))</span><br><span class="line">c3=&gt;condition: !  q</span><br><span class="line">o4=&gt;operation: exit(0)</span><br><span class="line">o5=&gt;operation: q-&gt;next = p-&gt;next;p-&gt;next = q;q-&gt;data = e;return q;</span><br><span class="line">o6=&gt;operation: return NULL</span><br><span class="line"></span><br><span class="line">i1-&gt;o1-&gt;c1</span><br><span class="line">c1(no)-&gt;o6</span><br><span class="line">c1(yes)-&gt;o2-&gt;c2</span><br><span class="line">c2(no)-&gt;o1</span><br><span class="line">c2(yes)-&gt;o3-&gt;c3(no)-&gt;o5</span><br><span class="line">c3(yes)-&gt;o4</span><br></pre></td></tr></table></figure>
+<div id="flowchart-1" class="flow-chart"></div>
+
 <p>​    链表中删除一个节点：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">i1=&gt;inputoutput: LinkList p, int i, ElemType *e</span><br><span class="line">c1=&gt;condition: i &lt; 1</span><br><span class="line">o1=&gt;operation: return 0</span><br><span class="line">o2=&gt;operation: LinkNode *q = p</span><br><span class="line">o3=&gt;operation: p = p-&gt;next</span><br><span class="line">c2=&gt;condition: p != NULL</span><br><span class="line">o4=&gt;operation: --i</span><br><span class="line">c3=&gt;condition: i &lt; 1</span><br><span class="line">o5=&gt;operation:  q-&gt;next = p-&gt;next;*e = p-&gt;data;free(p)</span><br><span class="line">o6=&gt;operation: return 1</span><br><span class="line">o7=&gt;operation: q = p</span><br><span class="line">o8=&gt;operation: return 0</span><br><span class="line"></span><br><span class="line">i1-&gt;c1</span><br><span class="line">c1(no)-&gt;o2-&gt;o3-&gt;c2(yes)-&gt;o4-&gt;c3(no)-&gt;o7(right)-&gt;o3</span><br><span class="line">c3(yes)-&gt;o5-&gt;o6</span><br><span class="line">c1(yes)-&gt;o1</span><br><span class="line">c2(no)-&gt;o8</span><br></pre></td></tr></table></figure>
+<div id="flowchart-2" class="flow-chart"></div>
+
+
+
+<p><script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">input1=>inputoutput: LinkList p, ElemType e
+condition1=>condition: p->next == NULL
+condition2=>condition: p->data == e
+operation1=>operation: return p
+operation2=>operation: return NULL
+operation3=>operation: p=p->next
+operation4=>operation: ..
+
+input1->operation4->condition1
+condition1(no,right)->operation3->condition2
+condition1(yes)->operation2(bottom)
+condition2(yes,bottom)->operation1(left)
+condition2(no)->operation4</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script><textarea id="flowchart-1-code" style="display: none">i1=>inputoutput: LinkList p, int i, ElemType e
+o1=>operation: ..
+c1=>condition: p!=NULL
+o2=>operation: --i
+c2=>condition: i < 1
+o3=>operation: LinkNode *q =(LinkNode *)malloc(sizeof(LinkNode))
+c3=>condition: !  q
+o4=>operation: exit(0)
+o5=>operation: q->next = p->next;p->next = q;q->data = e;return q;
+o6=>operation: return NULL
+
+i1->o1->c1
+c1(no)->o6
+c1(yes)->o2->c2
+c2(no)->o1
+c2(yes)->o3->c3(no)->o5
+c3(yes)->o4</textarea><textarea id="flowchart-1-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-1-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-1-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-1", options);</script><textarea id="flowchart-2-code" style="display: none">i1=>inputoutput: LinkList p, int i, ElemType *e
+c1=>condition: i < 1
+o1=>operation: return 0
+o2=>operation: LinkNode *q = p
+o3=>operation: p = p->next
+c2=>condition: p != NULL
+o4=>operation: --i
+c3=>condition: i < 1
+o5=>operation:  q->next = p->next;*e = p->data;free(p)
+o6=>operation: return 1
+o7=>operation: q = p
+o8=>operation: return 0
+
+i1->c1
+c1(no)->o2->o3->c2(yes)->o4->c3(no)->o7(right)->o3
+c3(yes)->o5->o6
+c1(yes)->o1
+c2(no)->o8</textarea><textarea id="flowchart-2-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-2-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-2-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-2", options);</script></p>
 
       
 
