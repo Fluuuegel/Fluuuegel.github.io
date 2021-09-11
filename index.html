@@ -151,7 +151,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/09/08/%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%88%97%E5%92%8C%E9%97%AE%E9%A2%98/">最大子序列和问题</a>
+      <a class="article-title" href="/2021/09/08/%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%88%97%E5%92%8C%E9%97%AE%E9%A2%98/">最大子序列和问题及流程图的绘制</a>
     </h1>
   
 
@@ -167,7 +167,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">640字</span>
+        <span class="post-count">923字</span>
       </span>
     </span>
 
@@ -176,7 +176,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">3分</span>
+        <span class="post-count">4分</span>
       </span>
     </span>
 </div>
@@ -189,7 +189,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="最大子序列和问题"><a href="#最大子序列和问题" class="headerlink" title="最大子序列和问题"></a>最大子序列和问题</h1><script type="math/tex; mode=display">
+        <h1 id="最大子序列和问题及流程图的绘制"><a href="#最大子序列和问题及流程图的绘制" class="headerlink" title="最大子序列和问题及流程图的绘制"></a>最大子序列和问题及流程图的绘制</h1><script type="math/tex; mode=display">
 给定整数序列 a1, a2, . . . , an，求j>k时\sum_{i=k}^{j}{a_i}的最大值\\给出算法及其时间复杂度分析，并尝试设计时间复杂度更优的算法。\\如果要求给出 k, j 的值，如何改进算法？</script>
         
       
@@ -240,7 +240,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/09/07/%E7%BA%BF%E6%80%A7%E8%A1%A8%E6%9E%84%E9%80%A0%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E8%BE%A8%E6%9E%90/">线性表构造的两种方式辨析</a>
+      <a class="article-title" href="/2021/09/07/%E7%BA%BF%E6%80%A7%E8%A1%A8%E6%9E%84%E9%80%A0%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E8%BE%A8%E6%9E%90/">构造线性表的两种方式</a>
     </h1>
   
 
@@ -256,7 +256,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">350字</span>
+        <span class="post-count">335字</span>
       </span>
     </span>
 
@@ -278,9 +278,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="教材与OJ中构造线性表的方式有所不同"><a href="#教材与OJ中构造线性表的方式有所不同" class="headerlink" title="教材与OJ中构造线性表的方式有所不同"></a>教材与OJ中构造线性表的方式有所不同</h1><p>​    教材中的代码：</p>
+        <h1 id="构造线性表的两种方式"><a href="#构造线性表的两种方式" class="headerlink" title="构造线性表的两种方式"></a>构造线性表的两种方式</h1><p>​    教材中：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LIST_INIT_SIZE 100	<span class="comment">//线性表存储空间的初始分配量</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LISTINCREMENT 10	<span class="comment">//线性表存储空间的分配增量</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OK 0</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	ElemType *elem;	<span class="comment">//存储空间基址</span></span><br><span class="line">	<span class="keyword">int</span> length;	<span class="comment">//当前长度</span></span><br><span class="line">	<span class="keyword">int</span> listsize;	<span class="comment">//当前分配的存储容量（（以sizeof（ElemType）为单位）</span></span><br><span class="line">&#125;SqList	<span class="comment">//结构体的别名 接下来的定义结构体直接使用SqList </span></span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">InitList_Sq</span><span class="params">(SqList &amp;L)</span></span>&#123;</span><br><span class="line">    L.elem = (ElemType *)<span class="built_in">malloc</span>(LIST_INIT_SIZE * <span class="keyword">sizeof</span>(ElemType));</span><br><span class="line">    <span class="keyword">if</span>(! L.elem) <span class="built_in">exit</span>(OVERFLOW);</span><br><span class="line">    L.length = <span class="number">0</span>;</span><br><span class="line">    L.listsize = LIST_INIT_SIZE;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>​    OJ中采用的代码：</p>
+<p>​    OJ中：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElementType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LNode</span> *<span class="title">List</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">LNode</span> &#123;</span></span><br><span class="line">    ElementType Data[MAXSIZE];</span><br><span class="line">    <span class="keyword">int</span> Last; <span class="comment">/* 保存线性表中最后一个元素的位置 */</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">List <span class="title">MakeEmpty</span><span class="params">()</span></span>&#123;</span><br><span class="line">  List L;</span><br><span class="line">  L = ( List )<span class="built_in">malloc</span>( <span class="keyword">sizeof</span>( struct LNode ) );</span><br><span class="line">  L-&gt;Last = <span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">return</span> L;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>​    两种构造函数的返回值不同，前者返回List的引用 而后者利用返回值判断是否构造成功。</p>
 <p>​    前者在构造之前已经用<code>SqList L</code>初始化了，结构体中的后两个整型变量已经被系统分配了内存，故构造函数中只需考虑开辟<code>L.elem</code>的内存即可。</p>
@@ -530,8 +530,6 @@
     </div>
   </div>
 </footer>
-<!--页面点击小红心-->
-<script type="text/javascript" src="/love.js"></script>
     </div>
     <script>
 	var yiliaConfig = {
@@ -695,11 +693,11 @@ MathJax.Hub.Queue(function() {
   
   <!--动态线条背景-->
 
-    <script type="text/javascript" color="0, 0, 0" opacity="1.0" 
+    <script type="text/javascript" color="0, 0, 0" opacity="0.8" 
         zIndex="-1" count="80" 
         src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
     </script>
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1,"jsonPath":"/live2dw/assets/lewis_3502.model.json"},"display":{"width":180,"height":360,"position":"right","hOffset":10,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacity":1},"dialog":{"enable":true,"hitokoto":true},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1.6,"jsonPath":"/live2dw/assets/r93_3501.model.json"},"display":{"width":180,"height":360,"position":"right","hOffset":50,"vOffset":-50},"mobile":{"show":true,"scale":1},"react":{"opacity":1},"dialog":{"enable":true,"hitokoto":true},"log":false});</script></body>
 </html>
