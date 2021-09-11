@@ -144,6 +144,101 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-基于Markdown-Flow流程图的绘制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/11/%E5%9F%BA%E4%BA%8EMarkdown-Flow%E6%B5%81%E7%A8%8B%E5%9B%BE%E7%9A%84%E7%BB%98%E5%88%B6/">基于Markdown Flow流程图的绘制</a>
+    </h1>
+  
+
+        
+        <a href="/2021/09/11/%E5%9F%BA%E4%BA%8EMarkdown-Flow%E6%B5%81%E7%A8%8B%E5%9B%BE%E7%9A%84%E7%BB%98%E5%88%B6/" class="archive-article-date">
+  	<time datetime="2021-09-11T10:15:54.172Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-11</time>
+</a>
+        
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">408字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">2分</span>
+      </span>
+    </span>
+</div>
+
+          
+        <!-- 添加完成 -->
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="基于Markdown-Flow流程图的绘制"><a href="#基于Markdown-Flow流程图的绘制" class="headerlink" title="基于Markdown Flow流程图的绘制"></a>基于Markdown Flow流程图的绘制</h1><p>​    绘制3个流程图：链表中查找给定元素，链表中插入一个节点，链表中删除一个节点。不限制绘制流程图的工具和方法，推荐使用 <a target="_blank" rel="noopener" href="https://plantuml.com/zh/">plantUML</a></p>
+<p>​    以下使用flow基本语法绘制流程图，不过遇到了一些难以解决的问题（condition-&gt;condition时出现的bug），暂时用多余的operation块解决。</p>
+<p>​    请自行将代码复制到Typora中查看流程图效果。(注意先添加flow代码块)</p>
+<p>​    查找给定元素：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">input1=&gt;inputoutput: LinkList p, ElemType e</span><br><span class="line">condition1=&gt;condition: p-&gt;next == NULL</span><br><span class="line">condition2=&gt;condition: p-&gt;data == e</span><br><span class="line">operation1=&gt;operation: return p</span><br><span class="line">operation2=&gt;operation: return NULL</span><br><span class="line">operation3=&gt;operation: p=p-&gt;next</span><br><span class="line">operation4=&gt;operation: ..</span><br><span class="line"></span><br><span class="line">input1-&gt;operation4-&gt;condition1</span><br><span class="line">condition1(no,right)-&gt;operation3-&gt;condition2</span><br><span class="line">condition1(yes)-&gt;operation2(bottom)</span><br><span class="line">condition2(yes,bottom)-&gt;operation1(left)</span><br><span class="line">condition2(no)-&gt;operation4</span><br></pre></td></tr></table></figure>
+<p>​    链表中插入一个节点：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">i1=&gt;inputoutput: LinkList p, int i, ElemType e</span><br><span class="line">o1=&gt;operation: ..</span><br><span class="line">c1=&gt;condition: p!=NULL</span><br><span class="line">o2=&gt;operation: --i</span><br><span class="line">c2=&gt;condition: i &lt; 1</span><br><span class="line">o3=&gt;operation: LinkNode *q =(LinkNode *)malloc(sizeof(LinkNode))</span><br><span class="line">c3=&gt;condition: !  q</span><br><span class="line">o4=&gt;operation: exit(0)</span><br><span class="line">o5=&gt;operation: q-&gt;next = p-&gt;next;p-&gt;next = q;q-&gt;data = e;return q;</span><br><span class="line">o6=&gt;operation: return NULL</span><br><span class="line"></span><br><span class="line">i1-&gt;o1-&gt;c1</span><br><span class="line">c1(no)-&gt;o6</span><br><span class="line">c1(yes)-&gt;o2-&gt;c2</span><br><span class="line">c2(no)-&gt;o1</span><br><span class="line">c2(yes)-&gt;o3-&gt;c3(no)-&gt;o5</span><br><span class="line">c3(yes)-&gt;o4</span><br></pre></td></tr></table></figure>
+<p>​    链表中删除一个节点：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">i1=&gt;inputoutput: LinkList p, int i, ElemType *e</span><br><span class="line">c1=&gt;condition: i &lt; 1</span><br><span class="line">o1=&gt;operation: return 0</span><br><span class="line">o2=&gt;operation: LinkNode *q = p</span><br><span class="line">o3=&gt;operation: p = p-&gt;next</span><br><span class="line">c2=&gt;condition: p != NULL</span><br><span class="line">o4=&gt;operation: --i</span><br><span class="line">c3=&gt;condition: i &lt; 1</span><br><span class="line">o5=&gt;operation:  q-&gt;next = p-&gt;next;*e = p-&gt;data;free(p)</span><br><span class="line">o6=&gt;operation: return 1</span><br><span class="line">o7=&gt;operation: q = p</span><br><span class="line">o8=&gt;operation: return 0</span><br><span class="line"></span><br><span class="line">i1-&gt;c1</span><br><span class="line">c1(no)-&gt;o2-&gt;o3-&gt;c2(yes)-&gt;o4-&gt;c3(no)-&gt;o7(right)-&gt;o3</span><br><span class="line">c3(yes)-&gt;o5-&gt;o6</span><br><span class="line">c1(yes)-&gt;o1</span><br><span class="line">c2(no)-&gt;o8</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/09/11/%E5%9F%BA%E4%BA%8EMarkdown-Flow%E6%B5%81%E7%A8%8B%E5%9B%BE%E7%9A%84%E7%BB%98%E5%88%B6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-最大子序列和问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -151,7 +246,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/09/08/%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%88%97%E5%92%8C%E9%97%AE%E9%A2%98/">最大子序列和问题及流程图的绘制</a>
+      <a class="article-title" href="/2021/09/08/%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%88%97%E5%92%8C%E9%97%AE%E9%A2%98/">最大子序列和问题</a>
     </h1>
   
 
@@ -167,7 +262,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1k字</span>
+        <span class="post-count">640字</span>
       </span>
     </span>
 
@@ -176,7 +271,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">5分</span>
+        <span class="post-count">3分</span>
       </span>
     </span>
 </div>
@@ -189,7 +284,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="最大子序列和问题及流程图的绘制"><a href="#最大子序列和问题及流程图的绘制" class="headerlink" title="最大子序列和问题及流程图的绘制"></a>最大子序列和问题及流程图的绘制</h1><script type="math/tex; mode=display">
+        <h1 id="最大子序列和问题"><a href="#最大子序列和问题" class="headerlink" title="最大子序列和问题"></a>最大子序列和问题</h1><script type="math/tex; mode=display">
 给定整数序列 a1, a2, . . . , an，求j>k时\sum_{i=k}^{j}{a_i}的最大值\\给出算法及其时间复杂度分析，并尝试设计时间复杂度更优的算法。\\如果要求给出 k, j 的值，如何改进算法？</script>
         
       
@@ -699,5 +794,5 @@ MathJax.Hub.Queue(function() {
     </script>
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1.6,"jsonPath":"/live2dw/assets/r93_3501.model.json"},"display":{"width":180,"height":360,"position":"right","hOffset":50,"vOffset":-50},"mobile":{"show":true,"scale":1},"react":{"opacity":1},"dialog":{"enable":true,"hitokoto":true},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1.7,"jsonPath":"/live2dw/assets/r93_3501.model.json"},"display":{"width":180,"height":360,"position":"right","hOffset":50,"vOffset":-50},"mobile":{"show":true,"scale":1},"react":{"opacity":1},"dialog":{"enable":true,"hitokoto":true},"log":false});</script></body>
 </html>

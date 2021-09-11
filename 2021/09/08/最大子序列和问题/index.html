@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>最大子序列和问题及流程图的绘制 | 讲究猫的秘密花园</title>
+  <title>最大子序列和问题 | 讲究猫的秘密花园</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最大子序列和问题及流程图的绘制 给定整数序列 a1, a2, . . . , an，求j&gt;k时\sum_{i&#x3D;k}^{j}{a_i}的最大值\\给出算法及其时间复杂度分析，并尝试设计时间复杂度更优的算法。\\如果要求给出 k, j 的值，如何改进算法？">
+  <meta name="description" content="最大子序列和问题 给定整数序列 a1, a2, . . . , an，求j&gt;k时\sum_{i&#x3D;k}^{j}{a_i}的最大值\\给出算法及其时间复杂度分析，并尝试设计时间复杂度更优的算法。\\如果要求给出 k, j 的值，如何改进算法？">
 <meta property="og:type" content="article">
-<meta property="og:title" content="最大子序列和问题及流程图的绘制">
+<meta property="og:title" content="最大子序列和问题">
 <meta property="og:url" content="http://example.com/2021/09/08/%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%88%97%E5%92%8C%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="讲究猫的秘密花园">
-<meta property="og:description" content="最大子序列和问题及流程图的绘制 给定整数序列 a1, a2, . . . , an，求j&gt;k时\sum_{i&#x3D;k}^{j}{a_i}的最大值\\给出算法及其时间复杂度分析，并尝试设计时间复杂度更优的算法。\\如果要求给出 k, j 的值，如何改进算法？">
+<meta property="og:description" content="最大子序列和问题 给定整数序列 a1, a2, . . . , an，求j&gt;k时\sum_{i&#x3D;k}^{j}{a_i}的最大值\\给出算法及其时间复杂度分析，并尝试设计时间复杂度更优的算法。\\如果要求给出 k, j 的值，如何改进算法？">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-09-08T11:01:29.868Z">
-<meta property="article:modified_time" content="2021-09-11T09:59:56.895Z">
+<meta property="article:modified_time" content="2021-09-11T10:20:29.114Z">
 <meta property="article:author" content="一只说话讲究的猫">
 <meta name="twitter:card" content="summary">
   
@@ -153,7 +153,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      最大子序列和问题及流程图的绘制
+      最大子序列和问题
     </h1>
   
 
@@ -169,7 +169,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1k字</span>
+        <span class="post-count">640字</span>
       </span>
     </span>
 
@@ -178,7 +178,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">5分</span>
+        <span class="post-count">3分</span>
       </span>
     </span>
 </div>
@@ -191,7 +191,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="最大子序列和问题及流程图的绘制"><a href="#最大子序列和问题及流程图的绘制" class="headerlink" title="最大子序列和问题及流程图的绘制"></a>最大子序列和问题及流程图的绘制</h1><script type="math/tex; mode=display">
+        <h1 id="最大子序列和问题"><a href="#最大子序列和问题" class="headerlink" title="最大子序列和问题"></a>最大子序列和问题</h1><script type="math/tex; mode=display">
 给定整数序列 a1, a2, . . . , an，求j>k时\sum_{i=k}^{j}{a_i}的最大值\\给出算法及其时间复杂度分析，并尝试设计时间复杂度更优的算法。\\如果要求给出 k, j 的值，如何改进算法？</script><span id="more"></span>
 <h3 id="初始解法："><a href="#初始解法：" class="headerlink" title="初始解法："></a>初始解法：</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXSIZE 5</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> J,K;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Max</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a &gt;= b)</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> b;</span><br><span class="line">&#125;   <span class="comment">// 比较大小的函数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSum</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> b[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> Res;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; MAXSIZE; i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j &lt; MAXSIZE; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            b[MAXSIZE - i - <span class="number">1</span>] += a[j];</span><br><span class="line">        &#125;   <span class="comment">//从第N（0，1，2...）项开始记录后面所有项之和记录到b整型数组中，其中b[i]是前i+1项和</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; MAXSIZE<span class="number">-2</span>; i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i+<span class="number">2</span>; j &lt; MAXSIZE ; j++) <span class="comment">//题目条件j&gt;k的要求（若j-i = 1 则只有一项)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(i == <span class="number">0</span> &amp;&amp; j == <span class="number">2</span>)&#123;</span><br><span class="line">                Res = Max(b[j], b[j] - b[i]);</span><br><span class="line">                K = MAXSIZE - j;</span><br><span class="line">                J = MAXSIZE - (j - i) + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span>(Res &lt; b[j] - b[i])&#123;</span><br><span class="line">                    Res = b[j] - b[i];</span><br><span class="line">                    K = MAXSIZE - j;</span><br><span class="line">                    J = MAXSIZE - (j - i) + <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(Res &lt; b[j])&#123;</span><br><span class="line">                    Res = b[j];</span><br><span class="line">                    K = <span class="number">1</span>;</span><br><span class="line">                    J = j + <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// Res = Max(Res, b[j] - b[i]);</span></span><br><span class="line">                <span class="comment">// Res = Max(Res, b[j]);</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;   <span class="comment">//b整型数组中的数两两相减并记录最大的值</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> Res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[MAXSIZE],b[MAXSIZE] = &#123;<span class="number">0</span>&#125;,max;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; MAXSIZE; i++)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    max = MaxSum(a, b);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d&quot;</span>,max, K, J);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>（以MAXSIZE = 5为例）</p>
@@ -200,63 +200,6 @@
 <p>实现：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 5</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> boolean;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Max</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a &gt;= b)</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> b;</span><br><span class="line">&#125;   <span class="comment">// 比较大小的函数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSum</span><span class="params">(<span class="keyword">int</span> *a)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> MaxSum = <span class="number">0</span>,Sum = <span class="number">0</span>;</span><br><span class="line">    boolean Positive = <span class="number">0</span>;  <span class="comment">//判断增加过程中是否含有正值</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)&#123;</span><br><span class="line">        Sum += a[i];</span><br><span class="line">        <span class="keyword">if</span>(Sum &gt; <span class="number">0</span>)</span><br><span class="line">            Positive = <span class="number">1</span>;</span><br><span class="line">        Sum = Max(Sum, <span class="number">0</span>);</span><br><span class="line">        MaxSum = Max(Sum, MaxSum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(Positive == <span class="number">1</span>) <span class="keyword">return</span> MaxSum;</span><br><span class="line">    <span class="keyword">else</span>&#123;   <span class="comment">//全为负值的情况</span></span><br><span class="line">        MaxSum = a[<span class="number">0</span>];  <span class="comment">// 二次初始化MaxSum的值使其小于0</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; N; i++)&#123;</span><br><span class="line">            MaxSum = Max(MaxSum, a[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> MaxSum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[N];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, MaxSum(a));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>其时间复杂度为O(n)。</p>
-<h3 id="流程图："><a href="#流程图：" class="headerlink" title="流程图："></a>流程图：</h3><p>​    查找给定元素：</p>
-<div id="flowchart-0" class="flow-chart"></div>
-
-<p>​    链表中插入一个节点：</p>
-<div id="flowchart-1" class="flow-chart"></div>
-
-<p>​    链表中删除一个节点：</p>
-<div id="flowchart-2" class="flow-chart"></div>
-
-
-
-<p><script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">input1=>inputoutput: LinkList p, ElemType e
-condition1=>condition: p->next == NULL
-condition2=>condition: p->data == e
-operation1=>operation: return p
-operation2=>operation: return NULL
-operation3=>operation: p=p->next
-operation4=>operation: ..
-
-input1->operation4->condition1
-condition1(no,right)->operation3->condition2
-condition1(yes)->operation2(bottom)
-condition2(yes,bottom)->operation1(left)
-condition2(no)->operation4</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script><textarea id="flowchart-1-code" style="display: none">i1=>inputoutput: LinkList p, int i, ElemType e
-o1=>operation: ..
-c1=>condition: p!=NULL
-o2=>operation: --i
-c2=>condition: i < 1
-o3=>operation: LinkNode *q =(LinkNode *)malloc(sizeof(LinkNode))
-c3=>condition: !  q
-o4=>operation: exit(0)
-o5=>operation: q->next = p->next;p->next = q;q->data = e;return q;
-o6=>operation: return NULL
-
-i1->o1->c1
-c1(no)->o6
-c1(yes)->o2->c2
-c2(no)->o1
-c2(yes)->o3->c3(no)->o5
-c3(yes)->o4</textarea><textarea id="flowchart-1-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-1-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-1-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-1", options);</script><textarea id="flowchart-2-code" style="display: none">i1=>inputoutput: LinkList p, int i, ElemType *e
-c1=>condition: i < 1
-o1=>operation: return 0
-o2=>operation: LinkNode *q = p
-o3=>operation: p = p->next
-c2=>condition: p != NULL
-o4=>operation: --i
-c3=>condition: i < 1
-o5=>operation:  q->next = p->next;*e = p->data;free(p)
-o6=>operation: return 1
-o7=>operation: q = p
-o8=>operation: return 0
-
-i1->c1
-c1(no)->o2->o3->c2(yes)->o4->c3(no)->o7(right)->o3
-c3(yes)->o5->o6
-c1(yes)->o1
-c2(no)->o8</textarea><textarea id="flowchart-2-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-2-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-2-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-2", options);</script></p>
 
       
 
@@ -277,6 +220,15 @@ c2(no)->o8</textarea><textarea id="flowchart-2-options" style="display: none">{"
 
   
 <nav id="article-nav">
+  
+    <a href="/2021/09/11/%E5%9F%BA%E4%BA%8EMarkdown-Flow%E6%B5%81%E7%A8%8B%E5%9B%BE%E7%9A%84%E7%BB%98%E5%88%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          基于Markdown Flow流程图的绘制
+        
+      </div>
+    </a>
   
   
     <a href="/2021/09/07/%E7%BA%BF%E6%80%A7%E8%A1%A8%E6%9E%84%E9%80%A0%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E8%BE%A8%E6%9E%90/" id="article-nav-older" class="article-nav-link-wrap">
@@ -307,7 +259,7 @@ c2(no)->o8</textarea><textarea id="flowchart-2-options" style="display: none">{"
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%88%97%E5%92%8C%E9%97%AE%E9%A2%98%E5%8F%8A%E6%B5%81%E7%A8%8B%E5%9B%BE%E7%9A%84%E7%BB%98%E5%88%B6"><span class="toc-number">1.</span> <span class="toc-text">最大子序列和问题及流程图的绘制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E8%A7%A3%E6%B3%95%EF%BC%9A"><span class="toc-number">1.0.1.</span> <span class="toc-text">初始解法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E8%BF%9B%E8%A7%A3%E6%B3%95%EF%BC%88%E5%8F%AA%E9%80%82%E7%94%A8%E4%BA%8Ej-gt-k%E7%9A%84%E6%83%85%E5%86%B5-%E4%B9%8B%E5%90%8E%E4%BC%9A%E4%BC%98%E5%8C%96%EF%BC%89%EF%BC%9A"><span class="toc-number">1.0.2.</span> <span class="toc-text">改进解法（只适用于j&gt;&#x3D;k的情况 之后会优化）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E5%9B%BE%EF%BC%9A"><span class="toc-number">1.0.3.</span> <span class="toc-text">流程图：</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%88%97%E5%92%8C%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">最大子序列和问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E8%A7%A3%E6%B3%95%EF%BC%9A"><span class="toc-number">1.0.1.</span> <span class="toc-text">初始解法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E8%BF%9B%E8%A7%A3%E6%B3%95%EF%BC%88%E5%8F%AA%E9%80%82%E7%94%A8%E4%BA%8Ej-gt-k%E7%9A%84%E6%83%85%E5%86%B5-%E4%B9%8B%E5%90%8E%E4%BC%9A%E4%BC%98%E5%8C%96%EF%BC%89%EF%BC%9A"><span class="toc-number">1.0.2.</span> <span class="toc-text">改进解法（只适用于j&gt;&#x3D;k的情况 之后会优化）：</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -529,5 +481,5 @@ MathJax.Hub.Queue(function() {
     </script>
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1.6,"jsonPath":"/live2dw/assets/r93_3501.model.json"},"display":{"width":180,"height":360,"position":"right","hOffset":50,"vOffset":-50},"mobile":{"show":true,"scale":1},"react":{"opacity":1},"dialog":{"enable":true,"hitokoto":true},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1.7,"jsonPath":"/live2dw/assets/r93_3501.model.json"},"display":{"width":180,"height":360,"position":"right","hOffset":50,"vOffset":-50},"mobile":{"show":true,"scale":1},"react":{"opacity":1},"dialog":{"enable":true,"hitokoto":true},"log":false});</script></body>
 </html>
