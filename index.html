@@ -144,6 +144,123 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-report-PB20111630" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/17/report-PB20111630/">ICS Lab1 实验报告</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/17/report-PB20111630/" class="archive-article-date">
+  	<time datetime="2021-11-17T13:00:33.231Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-17</time>
+</a>
+        
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.4k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">7分</span>
+      </span>
+    </span>
+</div>
+
+          
+        <!-- 添加完成 -->
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div style="text-align:center;font-size:2.5em">ICS Lab1 实验报告</div>
+
+
+
+<blockquote>
+<p>张艺耀 PB20111630</p>
+</blockquote>
+<h1 id="L版本程序设计"><a href="#L版本程序设计" class="headerlink" title="L版本程序设计"></a>L版本程序设计</h1><h2 id="最初版本："><a href="#最初版本：" class="headerlink" title="最初版本："></a>最初版本：</h2><figure class="highlight plaintext"><figcaption><span>language</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">0011 0000 0000 0000 ;start the program at x3000</span><br><span class="line">;0101 111 111 1 00000    ;clear R7</span><br><span class="line">0001 111 111 0 00 001   ;add R1 to R7, put result in R7  ;x3000</span><br><span class="line">0001 000 000 1 00000    ;judge R0   ;x3001</span><br><span class="line">0000 001 000000001  ;branch to location x3004 if  positive ;x3002</span><br><span class="line">0001 000 000 1 00001    ;add 1 from R0,put result in R0    ;x3003</span><br><span class="line">0000 100 000000001  ;branch to location x3006 if negative   ;x3004</span><br><span class="line">0001 000 000 1 11111    ;sub 1 from R0, put result in R0    ;x3005</span><br><span class="line">0000 101 111111001  ;branch to location x3000 if not zero    ;x3006</span><br><span class="line">1111 0000 00100101  ;halt</span><br></pre></td></tr></table></figure>
+<p>​    净代码行数：7行。</p>
+<p>​    思路是判断R0内值正负并不断执行加或减的操作，每次循环加一个R内值，结果存储在R7。</p>
+<h2 id="简化后版本："><a href="#简化后版本：" class="headerlink" title="简化后版本："></a>简化后版本：</h2><figure class="highlight plaintext"><figcaption><span>language</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0011 0000 0000 0000 ;start the program at x3000</span><br><span class="line">0001 111 111 0 00 001   ;add R1 to R7,put result to R7 </span><br><span class="line">0001 000 000 1 11111    ;subtract 1 from R0, put result in R0</span><br><span class="line">0000 101 111111101  ;branch to x3000 if pos or neg</span><br><span class="line">1111 0000 00100101  ;halt</span><br></pre></td></tr></table></figure>
+<p>​    净代码行数：<strong>3行</strong>。</p>
+<p>​    若两乘数中R0所在值是正数，则很显然可以得到结果；若R0为负数，则存储在内存中的值为R0的补码，十进制数对应R0 + 2<sup>16</sup>。</p>
+<p>则R1 <em> (R0 + 2<sup>16</sup>) = R1 </em> R0 + R1 * 2<sup>16</sup>。由于计算都是模2<sup>16</sup>意义下的，故有</p>
+<p>$R1 <em> R0 + R1 </em> 2^{16} \equiv R1 * R0 (mod 2^{16})$</p>
+<p>结果仍为R1*R0。</p>
+<h1 id="P版本程序设计"><a href="#P版本程序设计" class="headerlink" title="P版本程序设计"></a>P版本程序设计</h1><h2 id="最初版本：-1"><a href="#最初版本：-1" class="headerlink" title="最初版本："></a>最初版本：</h2><p>​    思路：R2用于计数；R3初始值为1，每次循环左移并与R1相与，用于判断R1相应位数值为0或1；R4用于记录R1当前位数是0或1；R7存储结果。</p>
+<p>​    绘制流程图如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">s=&gt;start: start</span><br><span class="line">i1=&gt;inputoutput: R2 = 15 R3 = 1</span><br><span class="line">o1=&gt;operation: AND R1 R3 to R4</span><br><span class="line">c1=&gt;condition: R4 == 0</span><br><span class="line">o2=&gt;operation: R7 = R7 + R0</span><br><span class="line">o3=&gt;operation: R0&lt;&lt; R3&lt;&lt; R2--</span><br><span class="line">c2=&gt;condition: R2 &gt;= 0</span><br><span class="line">end=&gt;end: halt</span><br><span class="line"></span><br><span class="line">s-&gt;i1-&gt;o1-&gt;c1</span><br><span class="line">c1(no)-&gt;o3</span><br><span class="line">c1(yes)-&gt;o2(right)-&gt;o3-&gt;c2</span><br><span class="line">c2(no)-&gt;o1</span><br><span class="line">c2(yes)-&gt;end</span><br></pre></td></tr></table></figure>
+<p>​        代码实现：</p>
+<figure class="highlight plaintext"><figcaption><span>language</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">0011 0000 0000 0000	;start from x3000</span><br><span class="line">0001 010 010 1 01111	;add 15 to R2</span><br><span class="line">0001 011 011 1 00001	;add 1 to R3</span><br><span class="line"></span><br><span class="line">0101 100 001 0 00 011	;and R1 R3 to R4</span><br><span class="line">0000 010 000000001	;if R4 == 0, PC++</span><br><span class="line">0001 111 111 0 00 000	;R7 = R7 + R0</span><br><span class="line">0001 000 000 0 00 000	;R0&lt;&lt;</span><br><span class="line"></span><br><span class="line">0001 011 011 0 00 011	;R3&lt;&lt;</span><br><span class="line">0001 010 010 1 11111	;R2 = R2 - 1</span><br><span class="line">0000 011 111111001	;if R2 &gt;= 0, goto x3002</span><br><span class="line">1111 0000 00100101	;halt</span><br></pre></td></tr></table></figure>
+<p>​    每条循环执行7条指令，最多16次循环。初始指令有两条。故最多指令数：<strong>114</strong>条。</p>
+<p>​    <em>事实上，指令的多少取决于R1中0的多少，每个0使得每次循环执行6条语句；每个1使得每次循环执行7条语句。</em></p>
+<h2 id="优化版本："><a href="#优化版本：" class="headerlink" title="优化版本："></a>优化版本：</h2><p>​    可以将循环历程通过代码实现，使得指令条数减少到81条，代码如下：</p>
+<figure class="highlight plaintext"><figcaption><span>language</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">0011 0000 0000 0000	;start from x3000</span><br><span class="line">0001 011 011 1 00001	;add 1 to R3</span><br><span class="line"></span><br><span class="line">0101 100 001 0 00 011	;and R1 R3 to R4</span><br><span class="line">0000 010 000000001	;if R4 == 0, PC++</span><br><span class="line">0001 111 111 0 00 000	;R7 = R7 + R0</span><br><span class="line">0001 000 000 0 00 000	;R0&lt;&lt;</span><br><span class="line">0001 011 011 0 00 011	;R3&lt;&lt;</span><br><span class="line">x16</span><br><span class="line"></span><br><span class="line">1111 0000 00100101	;halt</span><br></pre></td></tr></table></figure>
+<h2 id="再优化："><a href="#再优化：" class="headerlink" title="再优化："></a>再优化：</h2><p>​    前几次循环用立即数实现，将最后一次循环多余的移位操作删去：</p>
+<figure class="highlight plaintext"><figcaption><span>language</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line">0011 0000 0000 0000	;start from x3000</span><br><span class="line"></span><br><span class="line">0101 100 001 1 00001	;and R1 00001 to R4</span><br><span class="line">0000 010 000000001	;if R4 == 0, PC++</span><br><span class="line">0001 111 111 0 00 000	;R7 = R7 + R0</span><br><span class="line">0001 000 000 0 00 000	;R0&lt;&lt;</span><br><span class="line"></span><br><span class="line">0101 100 001 1 00010	;and R1 00010 to R4</span><br><span class="line">0000 010 000000001	;if R4 == 0, PC++</span><br><span class="line">0001 111 111 0 00 000	;R7 = R7 + R0</span><br><span class="line">0001 000 000 0 00 000	;R0&lt;&lt;</span><br><span class="line"></span><br><span class="line">0101 100 001 1 00100	;and R1 00100 to R4</span><br><span class="line">0000 010 000000001	;if R4 == 0, PC++</span><br><span class="line">0001 111 111 0 00 000	;R7 = R7 + R0</span><br><span class="line">0001 000 000 0 00 000	;R0&lt;&lt;</span><br><span class="line"></span><br><span class="line">0001 011 011 1 01000	;add 1000 to R3</span><br><span class="line"></span><br><span class="line">0101 100 001 0 00 011	;and R1 R3 to R4</span><br><span class="line">0000 010 000000001	;if R4 == 0, PC++</span><br><span class="line">0001 111 111 0 00 000	;R7 = R7 + R0</span><br><span class="line">0001 000 000 0 00 000	;R0&lt;&lt;</span><br><span class="line">0001 011 011 0 00 011	;R3&lt;&lt;</span><br><span class="line"></span><br><span class="line">0101 100 001 0 00 011	;and R1 R3 to R4</span><br><span class="line">0000 010 000000001	;if R4 == 0, PC++</span><br><span class="line">0001 111 111 0 00 000	;R7 = R7 + R0</span><br><span class="line">0001 000 000 0 00 000	;R0&lt;&lt;</span><br><span class="line">0001 011 011 0 00 011	;R3&lt;&lt;</span><br><span class="line"></span><br><span class="line">0101 100 001 0 00 011	;and R1 R3 to R4</span><br><span class="line">0000 010 000000001	;if R4 == 0, PC++</span><br><span class="line">0001 111 111 0 00 000	;R7 = R7 + R0</span><br><span class="line">0001 000 000 0 00 000	;R0&lt;&lt;</span><br><span class="line">0001 011 011 0 00 011	;R3&lt;&lt;</span><br><span class="line"></span><br><span class="line">0101 100 001 0 00 011	;and R1 R3 to R4</span><br><span class="line">0000 010 000000001	;if R4 == 0, PC++</span><br><span class="line">0001 111 111 0 00 000	;R7 = R7 + R0</span><br><span class="line">0001 000 000 0 00 000	;R0&lt;&lt;</span><br><span class="line">0001 011 011 0 00 011	;R3&lt;&lt;</span><br><span class="line"></span><br><span class="line">0101 100 001 0 00 011	;and R1 R3 to R4</span><br><span class="line">0000 010 000000001	;if R4 == 0, PC++</span><br><span class="line">0001 111 111 0 00 000	;R7 = R7 + R0</span><br><span class="line">0001 000 000 0 00 000	;R0&lt;&lt;</span><br><span class="line">0001 011 011 0 00 011	;R3&lt;&lt;</span><br><span class="line"></span><br><span class="line">0101 100 001 0 00 011	;and R1 R3 to R4</span><br><span class="line">0000 010 000000001	;if R4 == 0, PC++</span><br><span class="line">0001 111 111 0 00 000	;R7 = R7 + R0</span><br><span class="line">0001 000 000 0 00 000	;R0&lt;&lt;</span><br><span class="line">0001 011 011 0 00 011	;R3&lt;&lt;</span><br><span class="line"></span><br><span class="line">0101 100 001 0 00 011	;and R1 R3 to R4</span><br><span class="line">0000 010 000000001	;if R4 == 0, PC++</span><br><span class="line">0001 111 111 0 00 000	;R7 = R7 + R0</span><br><span class="line">0001 000 000 0 00 000	;R0&lt;&lt;</span><br><span class="line">0001 011 011 0 00 011	;R3&lt;&lt;</span><br><span class="line"></span><br><span class="line">0101 100 001 0 00 011	;and R1 R3 to R4</span><br><span class="line">0000 010 000000001	;if R4 == 0, PC++</span><br><span class="line">0001 111 111 0 00 000	;R7 = R7 + R0</span><br><span class="line">0001 000 000 0 00 000	;R0&lt;&lt;</span><br><span class="line">0001 011 011 0 00 011	;R3&lt;&lt;</span><br><span class="line"></span><br><span class="line">0101 100 001 0 00 011	;and R1 R3 to R4</span><br><span class="line">0000 010 000000001	;if R4 == 0, PC++</span><br><span class="line">0001 111 111 0 00 000	;R7 = R7 + R0</span><br><span class="line">0001 000 000 0 00 000	;R0&lt;&lt;</span><br><span class="line">0001 011 011 0 00 011	;R3&lt;&lt;</span><br><span class="line"></span><br><span class="line">0101 100 001 0 00 011	;and R1 R3 to R4</span><br><span class="line">0000 010 000000001	;if R4 == 0, PC++</span><br><span class="line">0001 111 111 0 00 000	;R7 = R7 + R0</span><br><span class="line">0001 000 000 0 00 000	;R0&lt;&lt;</span><br><span class="line">0001 011 011 0 00 011	;R3&lt;&lt;</span><br><span class="line"></span><br><span class="line">0101 100 001 0 00 011	;and R1 R3 to R4</span><br><span class="line">0000 010 000000001	;if R4 == 0, PC++</span><br><span class="line">0001 111 111 0 00 000	;R7 = R7 + R0</span><br><span class="line">0001 000 000 0 00 000	;R0&lt;&lt;</span><br><span class="line">0001 011 011 0 00 011	;R3&lt;&lt;</span><br><span class="line"></span><br><span class="line">0101 100 001 0 00 011	;and R1 R3 to R4</span><br><span class="line">0000 010 000000001	;if R4 == 0, PC++</span><br><span class="line">0001 111 111 0 00 000	;R7 = R7 + R0</span><br><span class="line">0001 000 000 0 00 000	;R0&lt;&lt;</span><br><span class="line">0001 011 011 0 00 011	;R3&lt;&lt;</span><br><span class="line"></span><br><span class="line">0101 100 001 0 00 011	;and R1 R3 to R4</span><br><span class="line">0000 010 000000001	;if R4 == 0, PC++</span><br><span class="line">0001 111 111 0 00 000	;R7 = R7 + R0</span><br><span class="line"></span><br><span class="line">1111 0000 00100101	;halt</span><br></pre></td></tr></table></figure>
+<p>​    最差情况下指令条数：3 <em> 4 + 1 + 12 </em> 5 + 3 = 76条。</p>
+<p>​    最好情况下指令条数：3 <em> 4 + 1 + 12 </em> 4 + 3 = 54条。</p>
+<p>​    平均：65条指令。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/17/report-PB20111630/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-使用顺序表完成10进制到N进制的转换并实现加减乘的高精度计算（小数位高精）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
